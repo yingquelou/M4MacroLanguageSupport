@@ -2,13 +2,14 @@
   "name": "m4",
   "displayName": "M4 Macro Language Support",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
-    "vscode": "^1.96.0"
+    "vscode": "^1.70.3"
   },
   "author": {
     "name": "yingquelou"
   },
+  "publisher": "yingquelou",
   "categories": [
     "Programming Languages",
     "Snippets"
@@ -33,6 +34,16 @@
           ".m4"
         ],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "m4f",
+        "aliases": [
+          "GNU M4 Frozen File",
+          "m4f"
+        ],
+        "extensions": [
+          ".m4f"
+        ]
       }
     ],
     "snippets": [
@@ -44,7 +55,7 @@
     "grammars": [
       {
         "language": "m4",
-        "scopeName": "m4",
+        "scopeName": "source.m4",
         "path": "./syntaxes/m4.tmLanguage.json"
       }
     ]
@@ -62,7 +73,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.96.0",
+    "@types/vscode": "^1.70.3",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@typescript-eslint/eslint-plugin": "^8.17.0",

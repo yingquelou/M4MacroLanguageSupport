@@ -1,5 +1,4 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "",
 	"patterns": [
 		{
@@ -13,13 +12,13 @@
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.m4",
-				"match": "\\b(if|while|for|return)\\b"
+				"match": "\\b(ifelse|define|undefine|divert)\\b"
 			}]
 		},
 		"strings": {
 			"name": "string.quoted.double.m4",
-			"begin": "\"",
-			"end": "\"",
+			"begin": "`",
+			"end": "'",
 			"patterns": [
 				{
 					"name": "constant.character.escape.m4",
@@ -28,5 +27,5 @@
 			]
 		}
 	},
-	"scopeName": "m4"
+	"scopeName": "source.m4"
 }
