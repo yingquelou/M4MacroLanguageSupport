@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { m4RegisterCommand, m4RegisterCompletionItemProvider, m4GetTerminal, m4RegisterDocumentSymbolProvider } from './m4init';
+import { m4RegisterCommand, m4RegisterCompletionItemProvider, m4RegisterDocumentSymbolProvider } from './m4init';
 import * as fs from 'fs';
 
 // This method is called when your extension is activated

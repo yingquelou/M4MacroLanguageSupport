@@ -2,7 +2,7 @@
   "name": "m4",
   "displayName": "M4 Macro Language Support",
   "description": "",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.70.3"
   },
@@ -17,6 +17,26 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": [
+      {
+        "title": "m4",
+        "properties": {
+          "m4": {
+            "type": "object",
+            "description": "configuration of m4",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "m4 executable path"
+              }
+            },
+            "required": [
+              "path"
+            ]
+          }
+        }
+      }
+    ],
     "commands": [
       {
         "command": "test.helloWorld",
