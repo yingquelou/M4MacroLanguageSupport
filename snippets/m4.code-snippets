@@ -1,7 +1,8 @@
 {
     "define": {
         "prefix": "define",
-        "body": "define(`${1:macroName}', `${0:[expansion]}')"
+        "body": "define(`${1:macroName}', `${0:[expansion]}')",
+        "description": "Defines name to expand to expansion. If expansion is not given, it is taken to be empty.The expansion of define is void. The macro define is recognized only with parameters."
     },
     "undefine": {
         "prefix": "undefine",
@@ -35,7 +36,8 @@
     },
     "ifdef": {
         "prefix": "ifdef",
-        "body": "ifdef(`${1:macroName}', ${2:expansion1}, ${3:[expansion2]})"
+        "body": "ifdef(`${1:macroName}', ${2:expansion1}, ${3:[expansion2]})",
+        "description": "If name is defined as a macro, ifdef expands to string-1, otherwise to string-2. If string-2 is omitted, it is taken to be the empty string (according to the normal rules)."
     },
     "comment": {
         "prefix": "ifelse",
@@ -47,7 +49,8 @@
     },
     "switch case": {
         "prefix": "ifelse",
-        "body": "ifelse(${1:${2:string-1}, ${3:string-2}, ${4:equal-1}}, ${5:${6:string-3}, ${7:string-4}, ${8:equal-2}}, ${9:…}, ${10:[not-equal]})"
+        "body": "ifelse(${1:${2:string-1}, ${3:string-2}, ${4:equal-1}}, ${5:${6:string-3}, ${7:string-4}, ${8:equal-2}}, ${9:…}, ${10:[not-equal]})",
+        "description": "Used with only one argument, the ifelse simply discards it and produces no output.If called with three or four arguments, ifelse expands into equal, if string-1 and string-2 are equal (character for character), otherwise it expands to not-equal. A final fifth argument is ignored, after triggering a warning.If called with six or more arguments, and string-1 and string-2 are equal, ifelse expands into equal-1, otherwise the first three arguments are discarded and the processing starts again."
     },
     "shift": {
         "prefix": "shift",
@@ -167,7 +170,7 @@
     },
     "Integer expressions are evaluated with eval": {
         "prefix": "eval",
-        "body": "patsubst(`${1:expression}', `${2:[radix=`10']}', `${3:[width]}')",
+        "body": "eval(`${1:expression}', `${2:[radix=`10']}', `${3:[width]}')",
         "description": "Expands to the value of expression. The expansion is empty if a problem is encountered while parsing the arguments. If specified, radix and width control the format of the output."
     },
     "Determining the platform": {
@@ -212,5 +215,5 @@
         "prefix": "m4exit",
         "body": "m4exit(`${1:[code=`0']}')",
         "description": "Causes m4 to exit, with exit status code. If code is left out, the exit status is zero. If code cannot be parsed, or is outside the range of 0 to 255, the exit status is one. No further input is read, and all wrapped and diverted text is discarded."
-    },   
+    }
 }
