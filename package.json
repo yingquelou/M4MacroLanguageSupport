@@ -2,7 +2,7 @@
   "name": "m4",
   "displayName": "M4 Macro Language Support",
   "description": "",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.70.3"
   },

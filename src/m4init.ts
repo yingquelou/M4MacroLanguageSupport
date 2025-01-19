@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { exec } from 'child_process';
+import { exec, execSync } from 'child_process';
 function m4RegisterCommand(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('test.helloWorld', () => {
         // The code you place here will be executed every time your command is executed
@@ -27,24 +27,30 @@ function m4RegisterCompletionItemProvider(context: vscode.ExtensionContext) {
     );
 }
 function m4RegisterDocumentSymbolProvider(context: vscode.ExtensionContext) {
+    var path: string | undefined;
+    exec([path, "--version"].join(" "), (error, _, err) => {
+        if (error || err) { path = undefined; return; }
+        path = "m4";
+    })
     const m4config = vscode.workspace.getConfiguration("m4");
-    if (!m4config.has("path")) {
-        vscode.window.showWarningMessage("m4 path undefine in settings.json")
-        return;
-    }
-    var path = m4config.get<string>("path");
-    if (path) {
+    var cpath = m4config.get<string>("path");
+    if (cpath) {
         const reg = /\${env:(.*)}/
-        const match = path.match(reg)
+        const match = cpath.match(reg)
         if (match) {
-            path = path.replace(match[0], process.env[match[1]] as string).replace("\\", "/")
-            // vscode.workspace.openTextDocument({ content: path })
+            cpath = cpath.replace(match[0], process.env[match[1]] as string).replace("\\", "/")
         }
+        execSync([cpath, "--version"].join(" "))
+        // exec([cpath, "--version"].join(" "), (error, _, err) => {
+        //     if (error || err) { return; }
+        // })
+        path = cpath;
+    }
+    if (path) {
+        vscode.window.showInformationMessage(path)
         exec([path, "--version"].join(" "), (error, out, err) => {
             if (error) { vscode.window.showWarningMessage(error.message); return; }
             if (err) { vscode.window.showWarningMessage(err); return; }
-            // if (out) { vscode.window.showInformationMessage(out) }
-            exec([path].join(" "))
             context.subscriptions.push(
                 vscode.languages.registerDocumentSymbolProvider('m4', {
                     async provideDocumentSymbols(document, token) {

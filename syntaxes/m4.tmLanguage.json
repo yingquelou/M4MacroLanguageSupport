@@ -10,10 +10,8 @@
 	],
 	"repository": {
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.m4",
-				"match": "\\b(ifelse|define|undefine|divert)\\b"
-			}]
+			"name": "keyword.control.m4",
+			"match": "\\b(__file__|__gnu__|__line__|__os2__|__program__|__unix__|__windows__|builtin|changecom|changequote|changeword|debugfile|debugmode|decr|define|defn|divert|divnum|dnl|dumpdef|errprint|esyscmd|eval|format|ifdef|ifelse|include|incr|index|indir|len|m4exit|m4wrap|maketemp|mkstemp|os2|patsubst|popdef|pushdef|regexp|shift|sinclude|substr|syscmd|sysval|traceoff|traceon|translit|undefine|undivert|unix|windows)\\b"
 		},
 		"strings": {
 			"name": "string.quoted.double.m4",
