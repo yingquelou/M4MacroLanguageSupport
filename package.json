@@ -2,9 +2,10 @@
   "name": "m4",
   "displayName": "M4 Macro Language Support",
   "description": "",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
-    "vscode": "^1.70.3"
+    "vscode": "^1.70.3",
+    "node": "^16.13.2"
   },
   "author": {
     "name": "yingquelou"
@@ -95,7 +96,7 @@
   "devDependencies": {
     "@types/vscode": "^1.70.3",
     "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
+    "@types/node": "16.x.LTS",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
     "eslint": "^9.16.0",
