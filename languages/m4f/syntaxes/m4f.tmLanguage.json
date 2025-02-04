@@ -1,0 +1,25 @@
+{
+    "patterns": [
+        {
+            "include": "#entry"
+        }
+    ],
+    "repository": {
+        "entry": {
+            "patterns": [
+                {
+                    "match": "^[Ff]\\s*(\\d+)\\s*,\\s*(\\d+)\\s*",
+                    "captures": {
+                        "1": {
+                            "name": "variable.name.length.m4f"
+                        },
+                        "2": {
+                            "name": "variable.name.define.length.m4f"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "scopeName": "text.m4"
+}

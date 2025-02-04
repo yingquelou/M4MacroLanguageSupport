@@ -10,8 +10,16 @@
 	"typescript.tsc.autoDetect": "off",
 	"json.schemas": [
 		{
-			"fileMatch": ["*.tmLanguage.json"],
-			"url": ".vscode/tmlanguage.json"
+			"fileMatch": [
+				"*.tmLanguage.json"
+			],
+			"url": "./schema/json/tmlanguage.json"
+		},
+		{
+			"fileMatch": [
+				"*.dap.json"
+			],
+			"url": "./schema/json/dap.json"
 		}
 	]
 }

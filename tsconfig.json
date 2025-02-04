@@ -1,13 +1,13 @@
 {
 	"compilerOptions": {
-		"module": "Node16",
+		"module": "CommonJS",
 		"target": "ES2015",
 		"outDir": "out",
+		"rootDir": "src",
 		"lib": [
 			"ES2015"
 		],
 		"sourceMap": true,
-		"rootDir": "src",
 		"strict": true
 	}
 }

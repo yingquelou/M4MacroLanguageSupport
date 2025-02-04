@@ -1,0 +1,20 @@
+{
+    "file include": {
+        "prefix": [
+            "include",
+            "sinclude"
+        ],
+        "body": [
+            "pushdef(`divnum', builtin(`divnum'))dnl",
+            "divert(`-1')",
+            "ifdef(__file__,,`",
+            "define(__file__)",
+            "${LINE_COMMENT} Add content here:",
+            "$0",
+            "')",
+            "divert(divnum)dnl",
+            "popdef(`divnum')",
+        ],
+        "description": "When the current M4 source file is directly or indirectly included multiple times, make sure that the macros in the file are defined only once"
+    }
+}

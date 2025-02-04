@@ -1,23 +1,147 @@
 {
-  "name": "m4",
   "displayName": "M4 Macro Language Support",
+  "publisher": "yingquelou",
+  "name": "m4",
   "description": "",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "engines": {
-    "vscode": "^1.70.3",
-    "node": "^16.13.2"
+    "vscode": ">=1.70.3",
+    "node": ">=16.13.2"
   },
   "author": {
     "name": "yingquelou"
   },
-  "publisher": "yingquelou",
   "categories": [
     "Programming Languages",
-    "Snippets"
+    "Snippets",
+    "Debuggers"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:m4f",
+    "onLanguage:m4"
+  ],
   "main": "./out/extension.js",
   "contributes": {
+    "customEditors": [
+      {
+        "viewType": "m4f",
+        "displayName": "m4f",
+        "selector": [
+          {
+            "filenamePattern": "*.m4f"
+          }
+        ]
+      }
+    ],
+    "debuggers": [
+      {
+        "type": "m4",
+        "label": "M4 Debugger",
+        "program": "./out/m4DebugAdapter.js",
+        "runtime": "node",
+        "configurationAttributes": {
+          "launch": {
+            "type": "object",
+            "properties": {
+              "program": {
+                "type": "string",
+                "default": "${file}",
+                "description": "Path of the m4 file to debug"
+              },
+              "includes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "The search path when a file is included"
+              },
+              "cwd": {
+                "type": "string",
+                "default": "${fileDirname}",
+                "description": "Working directory for the debugged program"
+              },
+              "m4": {
+                "type": "string",
+                "description": "m4 executable path"
+              },
+              "env": {
+                "type": "object",
+                "description": "Environment variables to set for the program",
+                "properties": {
+                  "M4PATH": {
+                    "type": "string",
+                    "description": "If defined, the environment variable M4PATH is a colon-separated list of directories included after any specified by `-I'."
+                  }
+                },
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "defines": {
+                "type": "object",
+                "description": "--define=NAME[=VALUE],-DNAME[=VALUE]",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "undefines": {
+                "type": "array",
+                "description": "--undefine=NAME,-UNAME",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "traces": {
+                "type": "array",
+                "description": "--trace=NAME,trace NAME when it is defined",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "frozen": {
+                "type": "string",
+                "description": "produce a frozen state on FILE at end"
+              },
+              "reload": {
+                "type": "string",
+                "description": "reload a frozen state from FILE at start"
+              },
+              "arglength": {
+                "type": "integer",
+                "minimum": 9,
+                "description": "restrict macro tracing size"
+              }
+            }
+          }
+        },
+        "configurationSnippets": [
+          {
+            "label": "m4 launch debugger",
+            "body": {
+              "name": "Launch",
+              "type": "m4",
+              "request": "launch",
+              "program": "${file}",
+              "cwd": "${fileDirname}"
+            },
+            "description": "m4 debugger"
+          }
+        ],
+        "languages": [
+          {
+            "id": "m4",
+            "extensions": [
+              ".m4"
+            ]
+          }
+        ]
+      }
+    ],
+    "configurationDefaults": {
+      "[m4]": {
+        "files.eol": "\n"
+      }
+    },
     "configuration": [
       {
         "title": "m4",
@@ -38,46 +162,47 @@
         }
       }
     ],
-    "commands": [
-      {
-        "command": "test.helloWorld",
-        "title": "Hello World"
-      }
-    ],
     "languages": [
       {
         "id": "m4",
         "aliases": [
-          "GNU M4",
-          "m4"
+          "M4"
         ],
         "extensions": [
           ".m4"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./languages/m4/conf/language-configuration.json"
       },
       {
         "id": "m4f",
         "aliases": [
-          "GNU M4 Frozen File",
-          "m4f"
+          "M4 Frozen File"
         ],
         "extensions": [
           ".m4f"
         ]
       }
     ],
+    "breakpoints": [
+      {
+        "language": "m4"
+      }
+    ],
     "snippets": [
       {
         "language": "m4",
-        "path": "./snippets/m4.code-snippets"
+        "path": "./languages/m4/snippets/m4.common.code-snippets"
+      },
+      {
+        "language": "m4",
+        "path": "./languages/m4/snippets/m4.common.code-snippets"
       }
     ],
     "grammars": [
       {
         "language": "m4",
         "scopeName": "source.m4",
-        "path": "./syntaxes/m4.tmLanguage.json"
+        "path": "./languages/m4/syntaxes/m4.tmLanguage.json"
       }
     ]
   },
@@ -91,17 +216,21 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "publish": "vsce --help",
+    "package": "vsce package"
   },
   "devDependencies": {
-    "@types/vscode": "^1.70.3",
     "@types/mocha": "^10.0.10",
-    "@types/node": "16.x.LTS",
-    "@typescript-eslint/eslint-plugin": "^8.17.0",
-    "@typescript-eslint/parser": "^8.17.0",
-    "eslint": "^9.16.0",
-    "typescript": "^5.7.2",
+    "@types/node": "^16.13.2",
+    "@types/vscode": "^1.70.3",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "@vscode/debugadapter": "^1.68.0",
     "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^3.2.1",
+    "eslint": "^9.19.0",
+    "typescript": "^5.7.3"
   }
 }

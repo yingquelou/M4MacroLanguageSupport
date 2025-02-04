@@ -1,5 +1,4 @@
 {
-	"name": "",
 	"patterns": [
 		{
 			"include": "#keywords"
@@ -15,7 +14,7 @@
 		},
 		"validMacro": {
 			"name": "entity.name.function.preprocessor.m4",
-			"match": "[_A-Za-z](\\w|_)*"		
+			"match": "[_A-Za-z](\\w|_)*"
 		}
 	},
 	"scopeName": "source.m4"
