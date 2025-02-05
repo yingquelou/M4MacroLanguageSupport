@@ -40,8 +40,8 @@ export default class M4DebugSession extends da.DebugSession {
     }
     protected launchRequest(response: DebugProtocol.LaunchResponse, args: any, request?: DebugProtocol.Request): void {
         this.BindEvent();
-        this.sendResponse(response);
         this._runner.debug(args);
+        this.sendResponse(response);
     }
 
     // protected pauseRequest(response: DebugProtocol.PauseResponse, args: DebugProtocol.PauseArguments, request?: DebugProtocol.Request): void {
@@ -50,25 +50,29 @@ export default class M4DebugSession extends da.DebugSession {
 
 
     protected nextRequest(response: DebugProtocol.NextResponse, args: DebugProtocol.NextArguments, request?: DebugProtocol.Request): void {
-        this.sendResponse(response);
-        this._runner.emit('next');
+        this._runner.emit('next',()=>{
+            this.sendResponse(response);
+        });
     }
     protected evaluateRequest(response: DebugProtocol.EvaluateResponse, args: DebugProtocol.EvaluateArguments, request?: DebugProtocol.Request): void {
-        this.sendResponse(response);
-        this._runner.emit('evaluate', args.expression);
+        this._runner.emit('evaluate', args.expression,()=>{
+            this.sendResponse(response);
+        });
     }
 
     protected stepInRequest(response: DebugProtocol.StepInResponse, args: DebugProtocol.StepInArguments, request?: DebugProtocol.Request): void {
-        this.sendResponse(response);
-        this._runner.emit('next');
+        this._runner.emit('next',()=>{
+            this.sendResponse(response);
+        });
     }
     protected stepOutRequest(response: DebugProtocol.StepOutResponse, args: DebugProtocol.StepOutArguments, request?: DebugProtocol.Request): void {
-        this.sendResponse(response);
-        this._runner.emit('next');
+        this._runner.emit('next',()=>{
+            this.sendResponse(response);
+        });
     }
     protected continueRequest(response: DebugProtocol.ContinueResponse, args: DebugProtocol.ContinueArguments, request?: DebugProtocol.Request): void {
-        this.sendResponse(response);
         this._runner.emit('continue');
+        this.sendResponse(response);
     }
     protected setBreakPointsRequest(response: DebugProtocol.SetBreakpointsResponse, args: DebugProtocol.SetBreakpointsArguments, request?: DebugProtocol.Request): void {
         if (args.breakpoints) {

@@ -3,7 +3,7 @@
   "publisher": "yingquelou",
   "name": "m4",
   "description": "",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "engines": {
     "vscode": ">=1.70.3",
     "node": ">=16.13.2"
@@ -195,7 +195,7 @@
       },
       {
         "language": "m4",
-        "path": "./languages/m4/snippets/m4.common.code-snippets"
+        "path": "./languages/m4/snippets/m4.keywords.code-snippets"
       }
     ],
     "grammars": [
@@ -211,26 +211,23 @@
     "url": "https://github.com/yingquelou/M4MacroLanguageSupport.git"
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "prepublish": "npm run compile",
+    "prepackage": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
     "test": "vscode-test",
-    "publish": "vsce --help",
+    "publish": "vsce publish",
     "package": "vsce package"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.10",
     "@types/node": "^16.13.2",
     "@types/vscode": "^1.70.3",
-    "@typescript-eslint/eslint-plugin": "^8.22.0",
-    "@typescript-eslint/parser": "^8.22.0",
-    "@vscode/debugadapter": "^1.68.0",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1",
     "@vscode/vsce": "^3.2.1",
-    "eslint": "^9.19.0",
     "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@vscode/debugadapter": "^1.68.0"
   }
 }

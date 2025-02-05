@@ -63,7 +63,7 @@ export class M4Runtime extends EventEmitter {
                 this._lines = text.split(/\r?\n/);
                 const seqreg = /\\/g;
                 const lhs = program.replace(seqreg, '/').toLowerCase();
-                this.on('next', () => {
+                this.on('next', (res) => {
                     if (this._lineCt < this._lines.length) {
                         stdin.write(this._lines[this._lineCt] + '\n');
                         this._lineCt += 1;
@@ -73,6 +73,7 @@ export class M4Runtime extends EventEmitter {
                         stdin.end();
                         this.emit('Terminated');
                     }
+                    res();
                 });
                 var keepbreak = -1;
                 this.on('continue', () => {
@@ -104,15 +105,16 @@ export class M4Runtime extends EventEmitter {
                     }
                 });
 
-                this.on('evaluate', (exp) => {
+                this.on('evaluate', (exp, res) => {
                     stdin.write(exp + '\n');
+                    res();
                 });
                 this.on('stackTrace', (cb) => {
                     cb({
                         id: this.threadId,
                         name: 'main',
                         source: { path: program },
-                        line: this._lineCt,
+                        line: this._lineCt + ((this._lineCt === this._lines.length) ? 0 : 1),
                         column: 0
                     });
                 });
