@@ -4,5 +4,5 @@ const net = Net.createServer((sockect) => {
     const session = new M4DebugSession();
     session.setRunAsServer(true);
     session.start(sockect, sockect)
-}).listen(8081).address() as Net.AddressInfo
+}).listen(0).address() as Net.AddressInfo
 export const port = net.port

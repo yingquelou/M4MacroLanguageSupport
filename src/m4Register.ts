@@ -9,10 +9,10 @@ function m4RegisterCommand(context: vscode.ExtensionContext) {
     // The commandId parameter must match the command field in package.json
 
     // context.subscriptions.push(vscode.commands.registerCommand('m4.debugger.start', () => {
-        // The code you place here will be executed every time your command is executed
-        // Display a message box to the user
-        // vscode.debug.activeDebugSession?.customRequest('start');
-        // vscode.window.showInformationMessage('Hello World from test!');
+    // The code you place here will be executed every time your command is executed
+    // Display a message box to the user
+    // vscode.debug.activeDebugSession?.customRequest('start');
+    // vscode.window.showInformationMessage('Hello World from test!');
     // }));
 }
 
@@ -139,14 +139,6 @@ function m4RegisterDebugAdapter(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.debug.registerDebugAdapterDescriptorFactory('m4', {
             createDebugAdapterDescriptor(session, executable) {
-                // if (!server) {
-                //     server = Net.createServer((socket) => {
-                //         const session = new M4DebugSession();
-                //         session.setRunAsServer(false)
-                //         session.start(socket as NodeJS.ReadableStream, socket);
-                //     }).listen(8081)
-                // }
-                // const port = (server.address() as Net.AddressInfo).port;
                 return new vscode.DebugAdapterServer(port);
                 // return new vscode.DebugAdapterInlineImplementation(new M4DebugSession()); 
             }

@@ -2,8 +2,7 @@
   "displayName": "M4 Macro Language Support",
   "publisher": "yingquelou",
   "name": "m4",
-  "description": "",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "engines": {
     "vscode": ">=1.70.3",
     "node": ">=16.13.2"
@@ -215,9 +214,6 @@
     "prepackage": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src",
-    "test": "vscode-test",
     "publish": "vsce publish",
     "package": "vsce package"
   },

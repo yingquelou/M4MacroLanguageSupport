@@ -22,6 +22,9 @@ export class M4Runtime extends EventEmitter {
         if (m4 === undefined) {
             m4 = 'm4';
         }
+        if (includes === undefined) {
+            includes = [];
+        }
         if (!path.isAbsolute(program)) {
             program = path.join(cwd, program);
         }
@@ -134,7 +137,7 @@ export class M4Runtime extends EventEmitter {
 
                     tdf += 1;
                     if (buildin && other) {
-                        const scopesprocess = spawn(m4, ['-i', '-F', tmpfile, ...m4includes], { cwd: cwd });
+                        const scopesprocess = spawn(m4, ['-i', '-F', tmpfile.replace(/\\/g,'/'), ...m4includes], { cwd: cwd });
                         for (let i = 0; i < this._lineCt; i++) {
                             const line = this._lines[i];
                             scopesprocess.stdin.write(line + '\n');
