@@ -2,7 +2,7 @@
   "displayName": "M4 Macro Language Support",
   "publisher": "yingquelou",
   "name": "m4",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "engines": {
     "vscode": ">=1.70.3",
     "node": ">=16.13.2"
@@ -17,10 +17,17 @@
   ],
   "activationEvents": [
     "onLanguage:m4f",
-    "onLanguage:m4"
+    "onLanguage:m4",
+    "onCommand:m4.exportDiverts"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "m4.exportDiverts",
+        "title": "M4: Export Divert Stream"
+      }
+    ],
     "customEditors": [
       {
         "viewType": "m4f",
